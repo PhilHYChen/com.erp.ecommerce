@@ -16,22 +16,22 @@ import com.erp.ecommerce.service.ProductService;
 @RequestMapping("/api/ex/v1/products")
 public class ProductServiceController {
 	
-	@Autowired
-	ProductService productSvc;
-	
-	@GetMapping
-	public ResponseEntity<List<Product>> getAll() {
-		return ResponseEntity.ok().body(productSvc.getAll());
-	}	
-	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Product> getById(@PathVariable("id") Integer id) {
-		return ResponseEntity.of(productSvc.getById(id));
-	}
-	
-	@GetMapping(value = "/categories/{category}")
-	public ResponseEntity<List<Product>> getByCategory(@PathVariable("category") String category) {
-		return ResponseEntity.ok().body(productSvc.getByCategory(category));
-	}
+//	@Autowired
+//	ProductService productSvc;
+//	
+//	@GetMapping
+//	public ResponseEntity<List<Product>> getAll() {
+//		return ResponseEntity.ok().body(productSvc.getAll());
+//	}	
+//	
+//	@GetMapping(value = "/{id}")
+//	public ResponseEntity<Product> getById(@PathVariable("id") Integer id) {
+//		return ResponseEntity.of(productSvc.getById(id));
+//	}
+//	
+//	@GetMapping(value = "/categories/{category}")
+//	public ResponseEntity<List<Product>> getByCategory(@PathVariable("category") String category) {
+//		return ResponseEntity.ok().body(productSvc.getByCategory(category));
+//	}
 	
 }

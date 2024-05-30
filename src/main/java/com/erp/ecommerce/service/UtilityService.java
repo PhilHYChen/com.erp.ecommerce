@@ -12,30 +12,30 @@ import com.erp.ecommerce.repository.utility.PostalCodeRepository;
 @Service
 public class UtilityService {
 
-	@Autowired
-	private PostalCodeRepository postalCodeRepository;
-
-	public List<PostalCode> getAllPostalCodes() {
-		return postalCodeRepository.findAll();
-	}
-
-	public Optional<PostalCode> getPostalCodeById(Integer id) {
-		return postalCodeRepository.findById(id);
-	}
-
-	public Optional<PostalCode> createPostalCode(PostalCode postalCode) {
-		return (!postalCodeRepository.existsById(postalCode.getPostalCode()))
-				? Optional.of(postalCodeRepository.save(postalCode))
-				: Optional.empty();
-	}
-
-	public Optional<PostalCode> updatePostalCode(PostalCode postalCode) {
-		return Optional.of(postalCodeRepository.save(postalCode));
-	}
-	
-	public Optional<PostalCode> deletePostalCode(Integer id) {
-		postalCodeRepository.deleteById(id);
-		return postalCodeRepository.findById(id);		
-	}
+//	@Autowired
+//	private PostalCodeRepository postalCodeRepository;
+//
+//	public List<PostalCode> getAllPostalCodes() {
+//		return postalCodeRepository.findAll();
+//	}
+//
+//	public Optional<PostalCode> getPostalCodeById(Integer id) {
+//		return postalCodeRepository.findById(id);
+//	}
+//
+//	public Optional<PostalCode> createPostalCode(PostalCode postalCode) {
+//		return (!postalCodeRepository.existsById(postalCode.getPostalCode()))
+//				? Optional.of(postalCodeRepository.save(postalCode))
+//				: Optional.empty();
+//	}
+//
+//	public Optional<PostalCode> updatePostalCode(PostalCode postalCode) {
+//		return Optional.of(postalCodeRepository.save(postalCode));
+//	}
+//	
+//	public Optional<PostalCode> deletePostalCode(Integer id) {
+//		postalCodeRepository.deleteById(id);
+//		return postalCodeRepository.findById(id);		
+//	}
 	
 }

@@ -26,9 +26,11 @@ import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -37,16 +39,16 @@ public class Account extends AbstractAuditable<Account, Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private final Long id;
+	private Long id;
 
 	/**
 	 * Credentials
 	 */
 	@Column(unique = true)
 	@NotNull
-	private final String username;
+	private String username;
 	@NotNull
-	private final String passwordHash;
+	private String passwordHash;
 	//
 
 	/**
@@ -63,30 +65,30 @@ public class Account extends AbstractAuditable<Account, Long> {
 	@Column(updatable = false)
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	private final AccountType accountType;
+	private AccountType accountType;
 	@Nullable
 	@OneToOne
 	@JoinColumn
-	private final Customer customer;
+	private Customer customer;
 	@Nullable
 	@OneToOne
 	@JoinColumn
-	private final Employee employee;
+	private Employee employee;
 
 	/**
 	 * Authorities and additional Access Control required by 
 	 */
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "accounts_authorities", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
-	private final Set<Authority> authorities;
+	private Set<Authority> authorities;
 	@Column(name = "account_enabled")
-	private final Boolean accountEnabled;
+	private Boolean accountEnabled;
 	@Column(name = "account_locked")
-	private final Boolean accountLocked;
+	private Boolean accountLocked;
 	@Column(name = "account_expiry_date")
-	private final OffsetDateTime accountExpiryDate;
+	private OffsetDateTime accountExpiryDate;
 	@Column(name = "credentials_expiry_date")
-	private final OffsetDateTime credentialsExpiryDate;
+	private OffsetDateTime credentialsExpiryDate;
 
 	/**
 	 * Utility Enumeration

@@ -22,23 +22,23 @@ import com.erp.ecommerce.service.OrderService;
 @RestController
 @RequestMapping("/api/ex/v1/orders")
 public class OrderSvcController {
-
-	
-	@Autowired
-	OrderService orderSvc;
-	
-	@GetMapping()
-	public ResponseEntity<List<Order>> getByMid() {
-		return ResponseEntity.ok().body(orderSvc.getByCustomer());
-	}
-	
-	
-	@PostMapping(value = "/add")
-	public ResponseEntity<String> add(@RequestBody Order order) {
-		Optional<Order> createdOrder = orderSvc.create(order);
-		return (createdOrder.isPresent())
-				? ResponseEntity.created(URI.create("/api/in/v1/orders/" + createdOrder.get().getOid())).build()
-				: ResponseEntity.badRequest().body("Order already exists.");
-	}
-
+//
+//	
+//	@Autowired
+//	OrderService orderSvc;
+//	
+//	@GetMapping()
+//	public ResponseEntity<List<Order>> getByMid() {
+//		return ResponseEntity.ok().body(orderSvc.getByCustomer());
+//	}
+//	
+//	
+//	@PostMapping(value = "/add")
+//	public ResponseEntity<String> add(@RequestBody Order order) {
+//		Optional<Order> createdOrder = orderSvc.create(order);
+//		return (createdOrder.isPresent())
+//				? ResponseEntity.created(URI.create("/api/in/v1/orders/" + createdOrder.get().getOid())).build()
+//				: ResponseEntity.badRequest().body("Order already exists.");
+//	}
+//
 }

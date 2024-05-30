@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -53,6 +54,5 @@ public class Employee extends AbstractUserProfile {
 	 * Dispatchment Info
 	 */
 	@ManyToMany(mappedBy = "employees")
-	@JoinColumn
 	private Set<Dispatchment> dispatchments;
 }

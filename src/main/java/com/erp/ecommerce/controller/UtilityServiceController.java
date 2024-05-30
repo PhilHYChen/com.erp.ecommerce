@@ -21,42 +21,42 @@ import com.erp.ecommerce.service.UtilityService;
 @RestController
 @RequestMapping(value = "/api/ex/v1/enum")
 public class UtilityServiceController {
-
-	@Autowired
-	private UtilityService enumSvc;
-	
-	@GetMapping(value = "/postal-code")
-	public ResponseEntity<List<PostalCode>> getAllPostalCode() {
-		return ResponseEntity.ok(enumSvc.getAllPostalCodes());
-	}
-	
-	@GetMapping(value = "/postal-code/{id}")
-	public ResponseEntity<PostalCode> getById(@PathVariable("id") Integer id) {
-		return ResponseEntity.of(enumSvc.getPostalCodeById(id));
-	}
-	
-	@PostMapping(value = "/postal-code/add")
-	public ResponseEntity<String> add(@RequestBody PostalCode postalCode) {
-		Optional<PostalCode> createdPostalCode = enumSvc.createPostalCode(postalCode);
-		return (createdPostalCode.isPresent())
-				? ResponseEntity.created(URI.create("/api/in/v1/postalCodes/" + createdPostalCode.get().getPostalCode())).build()
-				: ResponseEntity.badRequest().body("PostalCode already exists.");
-	}
-	
-	@PutMapping(value = "/postal-code/{id}")
-	public ResponseEntity<String> update(@PathVariable("id") Integer id, @RequestBody PostalCode postalCode) {
-		return (id.equals(postalCode.getPostalCode()) && enumSvc.updatePostalCode(postalCode).isPresent())
-				? ResponseEntity.noContent().location(URI.create("/api/in/v1/postalCodes/" + id)).build()
-				: ResponseEntity.badRequest().body("PostalCode does not exist.");
-
-	}
-	
-	@DeleteMapping(value = "/postal-code/{id}")
-	public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
-		Optional<PostalCode> deletedPostalCode = enumSvc.deletePostalCode(id);
-		return (deletedPostalCode.isEmpty())
-				? ResponseEntity.noContent().build()
-				: ResponseEntity.badRequest().body("PostalCode does not exist.");
-	}
+//
+//	@Autowired
+//	private UtilityService enumSvc;
+//	
+//	@GetMapping(value = "/postal-code")
+//	public ResponseEntity<List<PostalCode>> getAllPostalCode() {
+//		return ResponseEntity.ok(enumSvc.getAllPostalCodes());
+//	}
+//	
+//	@GetMapping(value = "/postal-code/{id}")
+//	public ResponseEntity<PostalCode> getById(@PathVariable("id") Integer id) {
+//		return ResponseEntity.of(enumSvc.getPostalCodeById(id));
+//	}
+//	
+//	@PostMapping(value = "/postal-code/add")
+//	public ResponseEntity<String> add(@RequestBody PostalCode postalCode) {
+//		Optional<PostalCode> createdPostalCode = enumSvc.createPostalCode(postalCode);
+//		return (createdPostalCode.isPresent())
+//				? ResponseEntity.created(URI.create("/api/in/v1/postalCodes/" + createdPostalCode.get().getPostalCode())).build()
+//				: ResponseEntity.badRequest().body("PostalCode already exists.");
+//	}
+//	
+//	@PutMapping(value = "/postal-code/{id}")
+//	public ResponseEntity<String> update(@PathVariable("id") Integer id, @RequestBody PostalCode postalCode) {
+//		return (id.equals(postalCode.getPostalCode()) && enumSvc.updatePostalCode(postalCode).isPresent())
+//				? ResponseEntity.noContent().location(URI.create("/api/in/v1/postalCodes/" + id)).build()
+//				: ResponseEntity.badRequest().body("PostalCode does not exist.");
+//
+//	}
+//	
+//	@DeleteMapping(value = "/postal-code/{id}")
+//	public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+//		Optional<PostalCode> deletedPostalCode = enumSvc.deletePostalCode(id);
+//		return (deletedPostalCode.isEmpty())
+//				? ResponseEntity.noContent().build()
+//				: ResponseEntity.badRequest().body("PostalCode does not exist.");
+//	}
 	
 }

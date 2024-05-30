@@ -1,5 +1,6 @@
 package com.erp.ecommerce.model.user.profile;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -26,7 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-public class Customer extends AbstractUserProfile {
+public class Customer extends AbstractUserProfile implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +44,7 @@ public class Customer extends AbstractUserProfile {
 	 */
 	@OneToMany(mappedBy = "customer")
 	private Set<CartItem> cartItem;
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "customer")
 	private Set<Order> order;
 
 }
