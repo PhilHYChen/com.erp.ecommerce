@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Configuration;
 public class DataSourceConfiguration {
 
     @Bean
-    public DataSource getDataSource() {
+    DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:mem:testdb");
-        dataSourceBuilder.username("admin");
-        dataSourceBuilder.password("rASy2rThqqweM3keR7Zp3vPzQhd9ED8j");
+        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
+        dataSourceBuilder.url("jdbc:mysql://localhost:3306/erp");
+        dataSourceBuilder.username("root");
+        dataSourceBuilder.password("1234");
         return dataSourceBuilder.build();
     }
     

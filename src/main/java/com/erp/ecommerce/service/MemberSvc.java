@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.erp.ecommerce.configuration.security.SecurityContextService;
+import com.erp.ecommerce.configuration.security.securitycontext.SecurityContextService;
 import com.erp.ecommerce.model.user.profile.Customer;
 import com.erp.ecommerce.repository.user.profile.CustomerRepository;
 
@@ -28,10 +28,10 @@ public class MemberSvc {
 	 * CRUD Operation
 	 */
 
-	public Optional<Customer> getSelf() {
-		return Optional.of(securityContextService.getLoggedInCustomer());
-	}
-
+//	public Optional<Customer> getSelf() {
+//		return Optional.of(securityContextService.getLoggedInCustomer());
+//	}
+//
 //	public Optional<Customer> register (Customer member) {
 //		member.setMid(null);
 //		member.setPassword(passwordEncoder.encode(member.getPassword()));

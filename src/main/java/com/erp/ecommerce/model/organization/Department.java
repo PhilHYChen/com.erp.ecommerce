@@ -6,17 +6,20 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.erp.ecommerce.model.user.profile.Employee;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "departments")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -25,7 +28,7 @@ import lombok.Setter;
 public class Department {
 	
 	@Id
-	@Column(unique = true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	@OneToMany(mappedBy = "department")

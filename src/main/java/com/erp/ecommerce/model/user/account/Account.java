@@ -23,6 +23,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +31,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "accounts")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -93,7 +95,7 @@ public class Account extends AbstractAuditable<Account, Long> {
 	/**
 	 * Utility Enumeration
 	 */
-	private enum AccountType {
+	public enum AccountType {
 		CUSTOMER, EMPLOYEE
 	}
 
