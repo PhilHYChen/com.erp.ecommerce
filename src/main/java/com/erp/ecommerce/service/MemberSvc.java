@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.erp.ecommerce.configuration.security.securitycontext.SecurityContextService;
+import com.erp.ecommerce.configuration.security.securitycontext.CurrentUserService;
 import com.erp.ecommerce.model.user.profile.Customer;
 import com.erp.ecommerce.repository.user.profile.CustomerRepository;
 
@@ -22,7 +22,7 @@ public class MemberSvc {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	@Autowired
-	SecurityContextService securityContextService;
+	CurrentUserService securityContextService;
 	
 	/**
 	 * CRUD Operation

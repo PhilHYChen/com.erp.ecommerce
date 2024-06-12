@@ -10,22 +10,24 @@ import com.erp.ecommerce.configuration.security.authentication.AccountDetails;
 import com.erp.ecommerce.model.user.account.Account;
 import com.erp.ecommerce.model.user.profile.AbstractUserProfile;
 import com.erp.ecommerce.repository.user.account.AccountRepository;
-import com.erp.ecommerce.repository.user.profile.CustomerRepository;
-import com.erp.ecommerce.repository.user.profile.EmployeeRepository;
 
 @Service
-public class SecurityContextService {
+public class CurrentUserService<T extends AbstractUserProfile> {
 
 	@Autowired
 	AccountRepository accountRepository;
-	@Autowired
-	CustomerRepository customerRepository;
-	@Autowired
-	EmployeeRepository employeeRepository;
-	@Autowired
-	Function<Account, AbstractUserProfile> strategy;
 
-	public AbstractUserProfile getUserProfile(@AuthenticationPrincipal AccountDetails accountDetails) {
+	private final Function<Account, T> strategy;
+
+	public CurrentUserService(Function<Account, T> strategy) {
+		this.strategy = strategy;
+	};
+	
+	public Account getCurrentUserAccount(@AuthenticationPrincipal AccountDetails accountDetails) {
+		return accountRepository.findByUsername(accountDetails.getUsername()).orElseThrow();
+	}
+
+	public T getCurrentUserProfile(@AuthenticationPrincipal AccountDetails accountDetails) {
 		return strategy.apply(accountRepository.findByUsername(accountDetails.getUsername()).orElseThrow());
 	}
 

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.erp.ecommerce.configuration.security.securitycontext.SecurityContextService;
+import com.erp.ecommerce.configuration.security.securitycontext.CurrentUserService;
 import com.erp.ecommerce.model.order.Order;
 import com.erp.ecommerce.model.order.OrderItem;
 import com.erp.ecommerce.repository.order.CartItemRepository;

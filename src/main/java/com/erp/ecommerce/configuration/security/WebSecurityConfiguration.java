@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.erp.ecommerce.model.user.account.Account;
-import com.erp.ecommerce.model.user.profile.AbstractUserProfile;
+import com.erp.ecommerce.model.user.profile.Customer;
 
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -56,7 +56,7 @@ public class WebSecurityConfiguration {
 	 * is suitable. 
 	 */
 	@Bean
-	Function<Account, AbstractUserProfile> configureSecurityContextServiceStrategy() {
+	Function<Account, Customer> configureCurrentUserServiceStrategy() {
 		return (account) -> account.getCustomer();
 	};
 	
