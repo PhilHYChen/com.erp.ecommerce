@@ -4,6 +4,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 
 import java.util.function.Function;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultSecurityFilterChain;
@@ -19,4 +20,5 @@ public class Test {
 	
 	Function f = x -> x + "x";
 	
+	UsernamePasswordAuthenticationToken u;
 }

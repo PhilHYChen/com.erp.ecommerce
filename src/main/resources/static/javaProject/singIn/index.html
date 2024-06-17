@@ -21,7 +21,7 @@
 <script src="https://cdn.staticfile.org/angular.js/1.8.1/angular.min.js"></script>
 <!-- css-->
 <!-- <link rel="stylesheet" type="text/css" href="./css/basic.css"> -->
-<link rel="stylesheet" href="/css/shop.css">
+<link rel="stylesheet" href="/javaProject/css/shop.css">
 
 </head>
 
@@ -47,7 +47,7 @@
 									class="form-control form-control-lg" /> <label
 									class="form-label" for="typePasswordX-2">Password</label>
 							</div>
-
+							<input name="_csrf" type="hidden" value="">
 							<button type="button" class="btn btn-primary btn-lg btn-block"
 								onclick="login()">Login</button>
 
@@ -64,6 +64,8 @@
 
             let username = $("#username").val();
             let password = $("#password").val();
+			let csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+			console.log(csrfToken);
 
             var loginMember = {"username": username , "password":password};
 
@@ -78,31 +80,52 @@
                     'Access-Control-Allow-Origin': '*',
                     'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
                     'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Origin, Content-Type, Authorization, Accept',
-                    'cache-control': 'no-cache'
+                    'cache-control': 'no-cache',
+					'X-XSRF-TOKEN': csrfToken
                 },
                 data: loginMember,
                 dataType: "html",
-                success: function(data){
-                	 const htmlTemplate = `<!DOCTYPE html><html lang="en"><head></head><body></body></html>`;
+				success: function(response) {
+					if (response.status === 302) {
+						alert('登入成功！');
+						window.location.href = response.headers.get('Location') || '/index.html';
+					} else if (response.status === 405) {
+						alert('登入失敗，帳號或密碼錯誤。')
+					} else {
+						alert('登入失敗，請稍後再試一次。')
+					}
+					
+				},
+				error: function(xhr, status, error) {
+					// Handle login failure
+					if (xhr.status === 401) {
+						alert('Invalid username or password.');
+					} else {
+						alert('An error occurred: ' + xhr.responseText);
+					}
+				}
 
-                     const domparser = new DOMParser();
-                     const doc = domparser.parseFromString(data, "text/html"); // [object HTMLDocument]
+                // success: function(data){
+                // 	 const htmlTemplate = `<!DOCTYPE html><html lang="en"><head></head><body></body></html>`;
 
-                     const doctype = '<!DOCTYPE html>';
-                     const html = doc.documentElement.outerHTML;
+                //      const domparser = new DOMParser();
+                //      const doc = domparser.parseFromString(data, "text/html"); // [object HTMLDocument]
 
-					 if (html.includes('spring boot security replace...')){
-						 loginSuccess();
-				     }
-					 else {
-						 alert('登入失敗!');
-					 }
-                },
+                //      const doctype = '<!DOCTYPE html>';
+                //      const html = doc.documentElement.outerHTML;
+
+				// 	 if (html.includes('spring boot security replace...')){
+				// 		 loginSuccess();
+				//      }
+				// 	 else {
+				// 		 alert('登入失敗!');
+				// 	 }
+                // },
                 
-                error: function (jqXHR, thrownError) {
-                	let errorMsg = "jqXHR.status:" + jqXHR.status + "\n" + "message:" + thrownError;
-                	alert(errorMsg);
-                }
+                // error: function (jqXHR, thrownError) {
+                // 	let errorMsg = "jqXHR.status:" + jqXHR.status + "\n" + "message:" + thrownError;
+                // 	alert(errorMsg);
+                // }
             });
           }    
 
@@ -139,7 +162,7 @@
 						  var getCurrentLoginUser = localStorage.getItem('currentLoginUser');
 						  var getCurrentLoginUserJsonString = JSON.parse(getCurrentLoginUser);
 						  alert('登入成功!');
-						  window.location.replace("/index.html");
+						  window.location.replace("/javaProject/index.html");
 					  }
 					  else {
 						  alert('登入失敗!');

@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +17,7 @@ import com.erp.ecommerce.model.user.account.Authority;
 /**
  * UserDetails Implementation
  * Serves as an adapter between
- * ~model.account.Account and UserDetails. The method getProfileId() of this
- * specific implementation for this ecommerce microservice acquires Customer id.
+ * ~model.account.Account and UserDetails.
  */
 public class AccountDetails implements UserDetails {
 	
@@ -29,8 +29,6 @@ public class AccountDetails implements UserDetails {
 	private final Boolean accountNonLocked;
 	private final Boolean credentialsNonExpired;
 	private final Boolean enabled;
-
-	
 
 	public AccountDetails(Account account) {
 		this.username = account.getUsername();
@@ -81,6 +79,10 @@ public class AccountDetails implements UserDetails {
 		return this.enabled;
 	}
 
+//	@Override
+//	public void eraseCredentials() {
+//		this.password = null;		
+//	}
 	
 	/**
 	 * GrantedAuthority Implementation
@@ -104,5 +106,5 @@ public class AccountDetails implements UserDetails {
 		}
 
 	}
-	
+		
 }

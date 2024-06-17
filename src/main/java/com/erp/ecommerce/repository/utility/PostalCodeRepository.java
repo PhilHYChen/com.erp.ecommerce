@@ -8,4 +8,8 @@ import com.erp.ecommerce.model.utility.PostalCode;
 
 public interface PostalCodeRepository extends JpaRepository<PostalCode, Long> {
 
+	Optional<PostalCode> findByPostalCode(Integer postalCode);
+
+	boolean existsByPostalCode(Integer postalCode);
+
 }
