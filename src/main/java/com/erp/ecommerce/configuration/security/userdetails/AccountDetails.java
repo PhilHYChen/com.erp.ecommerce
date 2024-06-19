@@ -19,7 +19,7 @@ import com.erp.ecommerce.model.user.account.Authority;
  * Serves as an adapter between
  * ~model.account.Account and UserDetails.
  */
-public class AccountDetails implements UserDetails {
+public class AccountDetails implements UserDetails, CredentialsContainer {
 	
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 	private final String username;
@@ -79,10 +79,10 @@ public class AccountDetails implements UserDetails {
 		return this.enabled;
 	}
 
-//	@Override
-//	public void eraseCredentials() {
-//		this.password = null;		
-//	}
+	@Override
+	public void eraseCredentials() {
+		this.password = null;		
+	}
 	
 	/**
 	 * GrantedAuthority Implementation

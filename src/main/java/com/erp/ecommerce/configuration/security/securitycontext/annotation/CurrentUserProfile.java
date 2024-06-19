@@ -1,4 +1,4 @@
-package com.erp.ecommerce.configuration.security.securitycontext;
+package com.erp.ecommerce.configuration.security.securitycontext.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

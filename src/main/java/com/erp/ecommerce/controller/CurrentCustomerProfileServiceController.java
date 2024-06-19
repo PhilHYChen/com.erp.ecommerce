@@ -15,28 +15,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.erp.ecommerce.configuration.security.securitycontext.annotation.CurrentUserProfile;
 import com.erp.ecommerce.model.user.profile.Customer;
-import com.erp.ecommerce.service.MemberSvc;
+import com.erp.ecommerce.service.UserProfileService;
 
 @RestController
 @RequestMapping("/api/ex/v1/members")
-public class MemberSvcController {
-//	
-//	@Autowired
-//	MemberSvc memberSvc;
-//	
-//	/**
-//	 * CRUD Operation
-//	 */
-//	
-//	@GetMapping
-//	public ResponseEntity<Customer> getSelf() {
-//		return ResponseEntity.of(memberSvc.getSelf());
-//	}
-//	
+public class CurrentCustomerProfileServiceController {
+	
+	@Autowired
+	UserProfileService userProfileService;
+	
+	/**
+	 * CRUD Operation
+	 */
+	
+	@SuppressWarnings("unchecked")
+	@GetMapping
+	public ResponseEntity<Customer> getCustomerProfile(@CurrentUserProfile Customer customer) {
+		return ResponseEntity.of(userProfileService.getUserProfile(customer));
+	}
+	
 //	@PostMapping
 //	public ResponseEntity<String> register(@RequestBody Customer member) {
-//		Optional<Customer> createdMember = memberSvc.register(member);
+//		Optional<Customer> createdMember = userProfileService.register(member);
 //		return (createdMember.isPresent())
 //				? ResponseEntity.created(URI.create("/api/ex/v1/members" + createdMember.get().getMid())).build()
 //				: ResponseEntity.badRequest().body("Member already exists.");
@@ -44,7 +46,7 @@ public class MemberSvcController {
 //	
 //	@PutMapping
 //	public ResponseEntity<String> updateSelf(@RequestBody Customer member) {
-//		return (memberSvc.updateSelf(member).isPresent())
+//		return (userProfileService.updateSelf(member).isPresent())
 //				? ResponseEntity.noContent().location(URI.create("/api/ex/v1/members")).build()
 //				: ResponseEntity.badRequest().body("Member does not exist.");
 //
@@ -52,7 +54,7 @@ public class MemberSvcController {
 //	
 //	@DeleteMapping
 //	public ResponseEntity<String> deleteSelf() {
-//		Optional<Customer> deletedMember = memberSvc.deleteSelf();
+//		Optional<Customer> deletedMember = userProfileService.deleteSelf();
 //		return (deletedMember.isEmpty())
 //				? ResponseEntity.noContent().build()
 //				: ResponseEntity.badRequest().body("Member does not exist.");
@@ -65,12 +67,12 @@ public class MemberSvcController {
 //	
 //	@PostMapping(value = "/validate/username")
 //	public ResponseEntity<Boolean> isValidUsername(@RequestBody Customer member) {
-//		return ResponseEntity.ok(memberSvc.isValidUsername(member));
+//		return ResponseEntity.ok(userProfileService.isValidUsername(member));
 //	}
 //
 //	@PostMapping(value = "/validate/national-id")
 //	public ResponseEntity<Boolean> isValidNationalId(@RequestBody Customer member) {
-//		return ResponseEntity.ok(memberSvc.isValidNationalId(member));
+//		return ResponseEntity.ok(userProfileService.isValidNationalId(member));
 //	}
-//	
+	
 }
