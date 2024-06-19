@@ -8,4 +8,8 @@ import com.erp.ecommerce.model.user.profile.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	Optional<Customer> findById(Long id);
+
+	boolean existsByEmail(String email);
+
+	boolean existsByNationalId(String nationalId);
 }
