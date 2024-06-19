@@ -1,6 +1,9 @@
 package com.erp.ecommerce.model.product;
 
+import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.erp.ecommerce.model.user.account.Account;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -21,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-public class ProductInventory {
+public class ProductInventory extends AbstractAuditable<Account, Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -17,7 +17,7 @@ import com.erp.ecommerce.model.user.account.Authority;
 /**
  * UserDetails Implementation
  * Serves as an adapter between
- * ~model.account.Account and UserDetails.
+ * ~model.user.account.Account and UserDetails.
  */
 public class AccountDetails implements UserDetails, CredentialsContainer {
 	
@@ -87,7 +87,7 @@ public class AccountDetails implements UserDetails, CredentialsContainer {
 	/**
 	 * GrantedAuthority Implementation
 	 * Serves as an adapter between
-	 * ~model.account.Authority and GrantedAuthority.
+	 * ~model.user.account.Authority and GrantedAuthority.
 	 */
 	
 	public final class AuthorityDetails implements GrantedAuthority {
