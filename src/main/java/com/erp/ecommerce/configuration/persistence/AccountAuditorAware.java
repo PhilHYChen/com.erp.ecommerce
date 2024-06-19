@@ -5,12 +5,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 import com.erp.ecommerce.configuration.security.userdetails.AccountDetails;
 import com.erp.ecommerce.model.user.account.Account;
 import com.erp.ecommerce.repository.user.account.AccountRepository;
 
-public class AccountAuditorAware implements AuditorAware<Account>{
+@Component("auditorAware")
+public class AccountAuditorAware implements AuditorAware<Account> {
 
 	@Autowired
 	AccountRepository accountRepository;
