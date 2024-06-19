@@ -12,8 +12,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
-import com.erp.ecommerce.configuration.security.csrfprotection.CsrfCookieFilter;
-import com.erp.ecommerce.configuration.security.csrfprotection.SpaCsrfTokenRequestHandler;
+import com.erp.ecommerce.configuration.security.authentication.FormLoginAuthenticationFailureHandler;
+import com.erp.ecommerce.configuration.security.authentication.FormLoginAuthenticationSuccessHandler;
+import com.erp.ecommerce.configuration.security.csrf.CsrfCookieFilter;
+import com.erp.ecommerce.configuration.security.csrf.SpaCsrfTokenRequestHandler;
 import com.erp.ecommerce.model.user.account.Account;
 import com.erp.ecommerce.model.user.profile.Customer;
 
@@ -25,7 +27,6 @@ public class WebSecurityConfiguration {
 	 * Security Filters
 	 * @throws Exception 
 	 */
-
 	@Bean
 	SecurityFilterChain securityFilterChainProvider(HttpSecurity httpSecurity) throws Exception {
 	    httpSecurity
@@ -40,15 +41,15 @@ public class WebSecurityConfiguration {
 	            .anyRequest().permitAll()
 	            )
 	        .formLogin(form -> form
-	            .loginPage("/javaProject/singIn/index.html")
+	            .loginPage("/login.html")
 	            .loginProcessingUrl("/login")
-	            .defaultSuccessUrl("/index.html")
-	            .failureForwardUrl("/javaProject/singIn/index.html?error")
+	            .successHandler(new FormLoginAuthenticationSuccessHandler())
+	            .failureHandler(new FormLoginAuthenticationFailureHandler())
 	            .permitAll()
         		)
 	        .logout(logout -> logout
         		.logoutUrl("/logout")
-        		.logoutSuccessUrl("/javaProject/singIn/index.html")
+        		.logoutSuccessUrl("/login.html")
         		.invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
         		)

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
-import com.erp.ecommerce.configuration.security.authentication.AccountDetails;
+import com.erp.ecommerce.configuration.security.userdetails.AccountDetails;
 import com.erp.ecommerce.model.user.account.Account;
 import com.erp.ecommerce.model.user.profile.AbstractUserProfile;
 import com.erp.ecommerce.repository.user.account.AccountRepository;

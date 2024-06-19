@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+	<meta charset="utf-8">
+	<title>會員登入</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<!-- angular -->
+	<script src="https://cdn.staticfile.org/angular.js/1.8.1/angular.min.js"></script>
+	<!-- css-->
+	<!-- <link rel="stylesheet" type="text/css" href="./css/basic.css"> -->
+	<link rel="stylesheet" href="/css/shop.css">
+</head>
+
+<body>
+	<section class="vh-100 back">
+		<div class="container py-5 h-100">
+			<div class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+					<div class="card shadow-2-strong" style="border-radius: 1rem;">
+						<div class="card-body p-5 text-center">
+							<h3 class="mb-5">會員登入</h3>
+							<div class="form-outline mb-4">
+								<input type="text" id="username" class="form-control form-control-lg" />
+								<label class="form-label" for="username">Account</label>
+							</div>
+							<div class="form-outline mb-4">
+								<input type="password" id="password" class="form-control form-control-lg" />
+								<label class="form-label" for="password">Password</label>
+							</div>
+							<button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+<script>
+
+	document.querySelector("button[type='submit']").addEventListener('click', function (event) {
+		event.preventDefault();
+
+		const username = document.getElementById('username').value;
+		const password = document.getElementById('password').value;
+		const _csrf = getCsrfToken();
+
+		function getCsrfToken() {
+			let csrfToken = null;
+			const cookies = document.cookie.split(';');
+			cookies.forEach(cookie => {
+				const [name, value] = cookie.trim().split('=');
+				if (name === 'XSRF-TOKEN') {
+					csrfToken = value;
+				}
+			});
+			return csrfToken;
+		}
+
+		fetch('/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'X-XSRF-TOKEN': _csrf
+			},
+			body: new URLSearchParams({
+				'username': username,
+				'password': password,
+				'_csrf': _csrf
+			})
+		})
+			.then(response => {
+				if (response.ok) {
+					return response.json().then(data => {
+						console.log(data.message);
+						alert(data.message);
+						window.location.href = '/index.html';
+					});
+				} else {
+					return response.json().then(data => {
+						console.log(data.message);
+						alert(data.message);
+					});
+				}
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('服務忙線中，請稍後再試。');
+			});
+	});
+</script>
+
+</html>
